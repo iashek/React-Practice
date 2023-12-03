@@ -12,7 +12,7 @@ const RestaurantCard = (props) => {
         cuisines,
         avgRating,
         sla
-    } = resData.info;
+    } = resData?.info;
     // console.log("hello");
     // console.log(props);
     return (
