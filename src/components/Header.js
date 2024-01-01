@@ -26,8 +26,9 @@ const Header = () => {
                     <li className="px-4"><Link to="about">About Us</Link></li>
                     <li className="px-4"><Link to="contact">Contact Us</Link></li>
                     <li className="px-4"><Link to="grocery">Grocery</Link></li>
-                    <li className="px-4">Cart</li>
                     <button className="login" onClick={() => {btnNameReact === "Login"? setBtnNameReact("Logout") : setBtnNameReact("Login")}}>{btnNameReact}</button>
+                    <li className="px-4">Cart</li>
+                    <li className="font-bold">{data?.loggedInUser}</li>
                 </ul>
             </div>
         </div>

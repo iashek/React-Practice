@@ -7,11 +7,15 @@ import { MENU_API, RES_API } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import RestaurantCard from "./RestaurantCard";
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 
 const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [filteredRestaurant, setFilteredRestaurant] = useState([]);
     const [searchText, setSearchText] = useState("");
+
+    const {loggedInUser, setUserName } = useContext(UserContext);
 
     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
@@ -51,7 +55,7 @@ const Body = () => {
 
     // Conditional Rendering
     return (listOfRestaurants == undefined || listOfRestaurants.length === 0)? (
-    <Shimmer />
+      <Shimmer />
     ) : (
         <div className="body">
           <div className="filter flex">
@@ -65,6 +69,10 @@ const Body = () => {
             </div>
             <div className="search m-4 p-4 flex items-center">
               <button className="border px-4 py-2 bg-gray-100 rounded-lg" onClick={() => {filteredList=listOfRestaurants.filter((restaurant) => restaurant.info.avgRating >= 4.2);   setFilteredRestaurant(filteredList)}}>Top Rated Restaurants</button>
+            </div>
+            <div className="search m-4 p-4 flex items-center">
+              <label>Username : </label>
+              <input className="p-2 m-2 border border-solid" value={loggedInUser} onChange={(e) => setUserName(e.target.value)} />
             </div>
           </div>
           <div className="flex flex-wrap">

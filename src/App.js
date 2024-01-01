@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header.js";
 import Body from "./components/Body.js";
@@ -8,6 +8,8 @@ import Contact from "./components/Contact.js";
 import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu.js";
 import { lazy, Suspense } from "react";
+import UserContext from "./utils/UserContext.js";
+import { useState } from "react";
 
 //const heading = React.createElement("h1", {id: "heading", xyz: "abc"}, "Hello World from React!");
 
@@ -183,11 +185,29 @@ const Grocery = lazy(() => import("./components/Grocery.js"));
 const About = lazy(() => import("./components/About.js"));
 
 const AppLayout = () => {
+
+  const [userName, setUserName] = useState();
+
+  // authentication
+  useEffect(() => {
+    // make an API call and send username and password
+    const data = {
+      name: 'Abhishek Singh'
+    };
+    setUserName(data.name);
+  }, []);
+
+
+
     return (
-        <div className="app">
-                <Header />
-                <Outlet />
-        </div>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName}}>
+          <div className="app">
+            {/* <UserContext.Provider value={{ loggedInUser: "Melon Eusk"}}> */}
+              <Header />
+            {/* </UserContext.Provider> */}
+            <Outlet />
+          </div>
+      </UserContext.Provider>
     );
 };
 

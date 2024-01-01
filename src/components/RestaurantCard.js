@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
+import UserContext from "../utils/UserContext";
 
 const styleCard = {
     backgroundColor: "#f0f0f0"
@@ -13,6 +15,7 @@ const RestaurantCard = (props) => {
         avgRating,
         sla
     } = resData?.info;
+    const { loggedInUser } = useContext(UserContext);
     // console.log("hello");
     // console.log(props);
     return (
@@ -22,6 +25,7 @@ const RestaurantCard = (props) => {
             <h4>{cuisines.join(', ') }</h4>
             <h4>{avgRating} stars</h4>
             <h4>{sla.deliveryTime} mins</h4>
+            <h4>{loggedInUser}</h4>
         </div>
     );
 };

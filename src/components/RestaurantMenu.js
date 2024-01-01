@@ -18,8 +18,8 @@ const RestaurantMenu = () => {
 
     const [showIndex, setShowIndex] = useState(-1);
 
-    console.log("one")
-    console.log(resInfo)
+    // console.log("one")
+    // console.log(resInfo)
 
     if (resInfo === null) return <Shimmer />;
 
@@ -32,7 +32,7 @@ const RestaurantMenu = () => {
 
     const categories = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter( (c) => c.card?.["card"]?.["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
 
-    console.log(categories)
+    // console.log(categories)
     const len = categories.length;
 
     // const [open, setOpen] = useState(1);
