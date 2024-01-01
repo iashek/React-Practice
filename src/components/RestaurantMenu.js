@@ -10,11 +10,13 @@ const RestaurantMenu = () => {
     const resInfo = useRestaurantMenu(resId);
 
     console.log("one")
+    console.log(resInfo)
 
     if (resInfo === null) return <Shimmer />;
 
     const { name, cuisines } = resInfo?.cards[0]?.card?.card?.info;
-
+    // const { name, cuisines } = resInfo?.cards[5]?.card?.card?.gridElements.infoWithStyle;
+    
     const { itemCards } = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
     console.log(itemCards)
@@ -26,7 +28,7 @@ const RestaurantMenu = () => {
                 <h3>{cuisines.join(", ")}</h3>
                 <h2>Menu</h2>
                 <ul>
-                    {itemCards.map((item) => (
+                    {itemCards?.map((item) => (
                             <li key={item.card.info.id}>
                                 {item.card.info.name} - {"Rs."}{
                                 item.card.info.price/100 || item.card.info.defaultPrice/100}

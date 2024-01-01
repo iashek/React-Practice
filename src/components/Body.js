@@ -3,7 +3,7 @@ import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+import { MENU_API, RES_API } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import RestaurantCard from "./RestaurantCard";
@@ -15,18 +15,20 @@ const Body = () => {
 
     const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
-    // console.log(listOfRestaurants);
+    console.log("LOR");
+    console.log(listOfRestaurants);
 
     useEffect(() => {
       fetchData();
     }, []);
 
     const fetchData = async () => {
-      const data = await fetch(`${MENU_API}`);
+      const data = await fetch(`${RES_API}`);
     
 
       const json = await data.json();
 
+      console.log("Fetch");
       console.log(json);
 
       // Optional Chaining
@@ -53,16 +55,13 @@ const Body = () => {
             <div className="search m-4 p-4">
               <input type="text" className="border border-solid border-black" value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
               <button onClick = {() => {
-
-                console.log(searchText);
-                
                 let filteredRestaurants = listOfRestaurants.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                 setFilteredRestaurant(filteredRestaurants);
               }}
               className="px-4 py-2 bg-green-100 m-4 rounded-lg">Search</button>
             </div>
             <div className="search m-4 p-4 flex items-center">
-              <button className="border px-4 py-2 bg-gray-100 rounded-lg" onClick={() => {filteredList=listOfRestaurants.filter((restaurant) => restaurant.info.avgRating >= 4.5);   setListOfRestaurants(filteredList)}}>Top Rated Restaurants</button>
+              <button className="border px-4 py-2 bg-gray-100 rounded-lg" onClick={() => {filteredList=listOfRestaurants.filter((restaurant) => restaurant.info.avgRating >= 4.2);   setFilteredRestaurant(filteredList)}}>Top Rated Restaurants</button>
             </div>
           </div>
           <div className="flex flex-wrap">
