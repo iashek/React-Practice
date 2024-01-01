@@ -32,8 +32,11 @@ const Body = () => {
       console.log(json);
 
       // Optional Chaining
-      setListOfRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setFilteredRestaurant(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants); 
+      const res = json?.data?.cards.filter( (c) => c?.card?.card?.gridElements?.infoWithStyle?.["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle");
+      // setListOfRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      console.log(res);
+      setListOfRestaurants(res[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setFilteredRestaurant(res[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants); 
     };
 
     const onlineStatus = useOnlineStatus();
@@ -67,7 +70,7 @@ const Body = () => {
           <div className="flex flex-wrap">
               {filteredRestaurant.map((restaurant) => (
                       <Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}>
-                        {restaurant.info.isOpen? ( <RestaurantCardPromoted key={restaurant.info.id} resData={restaurant} /> ) : ( <RestaurantCard key={restaurant.info.id} resData={restaurant}  /> )}
+                        {restaurant?.info?.promoted ? ( <RestaurantCardPromoted key={restaurant.info.id} resData={restaurant} /> ) : ( <RestaurantCard key={restaurant.info.id} resData={restaurant}  /> )}
                       </Link>
               ))
               }

@@ -13,11 +13,11 @@ class UserClass extends React.Component {
             }
         };
         
-        console.log(props);
+        // console.log(props);
     }
 
     async componentDidMount() {
-        console.log(this.props.name + " Child Component Did Mount");
+        // console.log(this.props.name + " Child Component Did Mount");
 
         const data = await fetch(`${GIT_API}`);
         const json = await data.json();
@@ -26,15 +26,15 @@ class UserClass extends React.Component {
             userInfo: json
         })
 
-        console.log(json);
+        // console.log(json);
     }
 
     componentDidUpdate() {
-        console.log("Child Component Did Update")
+        // console.log("Child Component Did Update")
     }
 
     componentWillUnmount() {
-        console.log("Child Component Will UnMount")
+        // console.log("Child Component Will UnMount")
     }
 
     render() {
