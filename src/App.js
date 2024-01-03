@@ -10,6 +10,8 @@ import RestaurantMenu from "./components/RestaurantMenu.js";
 import { lazy, Suspense } from "react";
 import UserContext from "./utils/UserContext.js";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 
 //const heading = React.createElement("h1", {id: "heading", xyz: "abc"}, "Hello World from React!");
 
@@ -200,14 +202,14 @@ const AppLayout = () => {
 
 
     return (
-      <UserContext.Provider value={{ loggedInUser: userName, setUserName}}>
-          <div className="app">
-            {/* <UserContext.Provider value={{ loggedInUser: "Melon Eusk"}}> */}
+      <Provider store={appStore}>
+        <UserContext.Provider value={{ loggedInUser: userName, setUserName}}>
+            <div className="app">
               <Header />
-            {/* </UserContext.Provider> */}
-            <Outlet />
-          </div>
-      </UserContext.Provider>
+              <Outlet />
+            </div>
+        </UserContext.Provider>
+      </Provider>
     );
 };
 
@@ -235,6 +237,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurants/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Suspense fallback={<h1>Loading...</h1>}><Cart /></Suspense>,
       },
     ],
     errorElement: <Error />,
