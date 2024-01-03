@@ -1,10 +1,11 @@
-import { createSlice, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSlice, current } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         items: []
     },
+    // can have multiple reducer function here
     reducers: {
         // "addItems" here is basically a reducer function which will map to an action
         addItems: (state, action)=>{
@@ -15,7 +16,11 @@ const cartSlice = createSlice({
             state.items.pop();
         },
         clearCart: (state) =>{
+            console.log(current(state));
             state.items.length = 0; // []
+
+            // 2nd way, the below new array will replace the original state
+            // return { items: []};
         }
     }
 });

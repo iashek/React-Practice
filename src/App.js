@@ -184,6 +184,8 @@ const resObj = {
 
 const Grocery = lazy(() => import("./components/Grocery.js"));
 
+const Cart = lazy(() => import("./components/Cart.js"));
+
 const About = lazy(() => import("./components/About.js"));
 
 const AppLayout = () => {
