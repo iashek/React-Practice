@@ -38,7 +38,7 @@ const Body = () => {
       // Optional Chaining
       const res = json?.data?.cards.filter( (c) => c?.card?.card?.gridElements?.infoWithStyle?.["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.FavouriteRestaurantInfoWithStyle");
       // setListOfRestaurants(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      console.log(res);
+      console.log(res[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       setListOfRestaurants(res[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       setFilteredRestaurant(res[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants); 
     };
