@@ -5,8 +5,6 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { MENU_API, RES_API } from "../utils/constants";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import RestaurantCard from "./RestaurantCard";
-import RestaurantCard from "./RestaurantCard";
 import UserContext from "../utils/UserContext";
 import { useContext } from "react";
 
@@ -60,7 +58,7 @@ const Body = () => {
         <div className="body">
           <div className="filter flex">
             <div className="search m-4 p-4">
-              <input type="text" className="border border-solid border-black" value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
+              <input type="text" data-testid="searchInput" className="border border-solid border-black" value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
               <button onClick = {() => {
                 let filteredRestaurants = listOfRestaurants.filter((res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                 setFilteredRestaurant(filteredRestaurants);
